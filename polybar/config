@@ -72,8 +72,6 @@ background = ${colors.background}
 
 ; This has to do with the behavior of floating windows
 ; going above/below the bar, I think. This works for me.
-override-redirect = false
-wm-restack = i3
 
 line-size = 2
 border-size = 0
@@ -96,8 +94,6 @@ tray-position = right
 tray-padding = 0
 ;tray-transparent = false
 ;tray-background = #369
-;wm-restack = bspwm
-;wm-restack = i3
 
 ;override-redirect = true
 
@@ -166,25 +162,6 @@ label-visible-padding = 4
 ; urgent = Workspace with urgency hint set
 label-urgent-padding = 4
 
-[module/eth]
-type = internal/network
-interface = eno1
-interval = 3.0
-
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-connected-underline = ${colors.foreground}
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-; I tweaked the date module a good bit to get the date/clock how I wanted
-; you can do a lot to tweak this. It's pretty cool.
-
 [module/date]
 type = internal/date
 interval = 1
@@ -216,18 +193,11 @@ interval = 5
 
 [settings]
 screenchange-reload = true
-compositing-background = xor
-compositing-foreground = source
-;compositing-background = screen
-;compositing-border = over
+compositing-background = over
+compositing-foreground = over
+compositing-border = over
 
 [global/wm]
 margin-top = 5
 margin-bottom = 5
-
-[settings]
-;screenchange-reload = true
-;compositing-background = source
-;compositing-foreground = over
-;compositing-border = over
 
