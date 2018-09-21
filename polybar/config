@@ -1,0 +1,233 @@
+###################################
+#    Polybar Configuration File   #
+###################################
+
+# vim:ft=dosini
+
+[base16]
+base00 = #181818
+base01 = #282828
+base02 = #383838
+base03 = #585858
+base04 = #b8b8b8
+base05 = #d8d8d8
+base06 = #e8e8e8
+base07 = #f8f8f8
+base08 = #ab4642
+base09 = #dc9656
+base0a = #f7ca88
+base0b = #a1b56c
+base0c = #86c1b9
+base0d = #7cafc2
+base0e = #ba8baf
+base0f = #a16946
+
+[colors]
+background = ${base16.base00}
+background-status = ${base16.base01}
+background-selection = ${base16.base02}
+comment = ${base16.base03}
+foreground-dark = ${base16.base04}
+foreground = ${base16.base05}
+foreground-light = ${base16.base06}
+foreground-lightest = ${base16.base07}
+red = ${base16.base08}
+orange = ${base16.base09}
+yellow = ${base16.base0a}
+green = ${base16.base0b}
+teal = ${base16.base0c}
+blue = ${base16.base0d}
+purple = ${base16.base0e}
+brown = ${base16.base0f}
+transparent = #00000000
+
+[padding]
+default = 2
+extra = 4
+
+[icons]
+default = ֍
+
+
+###################################
+#         Define Left Bar         #
+###################################
+
+; You can set up multiple bars for multiple monitors,
+; if you are setting up polybar on a laptop you only need 
+; to set up one. You can also name it anything, eg: 'bar/foo'
+; You just need to coordinate it in the launch.sh file
+
+[bar/bar1]
+monitor = ${env:MONITOR:DisplayPort-0}
+dpi = 120
+width = 100%
+height = 55
+radius = 0
+fixed-center = true
+
+; Set the bar colors
+background = ${colors.background}
+;foreground = ${colors.foreground}
+
+; This has to do with the behavior of floating windows
+; going above/below the bar, I think. This works for me.
+override-redirect = false
+wm-restack = i3
+
+line-size = 2
+border-size = 0
+border-color = #ffffff
+padding-left = 0
+padding-right = 3
+
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = inconsolata:pixelsize=8;1
+
+; This is where you put the modules where you want them. Then you
+; customize the modules below in the modules section.
+modules-left = i3
+modules-center = 
+modules-right = wlan pulseaudio date time
+
+tray-position = right
+tray-padding = 0
+;tray-transparent = false
+;tray-background = #369
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+;cursor-scroll = ns-resize
+
+
+###################################
+#         Define Modules         #
+###################################
+
+; These modules are the content of the bar. I've removed a bunch, so check out
+; the example configuration file if you want something less minimal.
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+; This i3 module is what sets the workspaces. For some reason, I can get foreground
+; and border to change, but not bg, really. All my weird tweaking and padding DID get
+; me exactly what I wanted, even though this isn't really clean or perfect.
+
+[module/i3]
+type = internal/i3
+pin-wordpsaces = false
+strip wsnumbers = false
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = true
+reverse-scroll = true
+fuzzy-match = false
+
+format = <label-state> <label-mode>
+
+# Label
+
+label-mode = %mode%
+label-mode-padding = 4
+label-mode-background = ${colors.orange}
+label-mode-foreground = ${colors.background}
+
+; focused = Active workspace on focused monitor
+;label-focused = %index%
+;label-focused = ${icons.default}
+label-focused-padding = 4
+label-focused-foreground = ${colors.blue}
+label-focused-background = ${colors.orange}
+;label-focused-underline = #ffffff
+
+
+; unfocused = Inactive workspace on any monitor
+
+label-unfocused-padding = 4
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-padding = 4
+
+; urgent = Workspace with urgency hint set
+label-urgent-padding = 4
+
+[module/eth]
+type = internal/network
+interface = eno1
+interval = 3.0
+
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-connected-underline = ${colors.foreground}
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+; I tweaked the date module a good bit to get the date/clock how I wanted
+; you can do a lot to tweak this. It's pretty cool.
+
+[module/date]
+type = internal/date
+interval = 1
+date = %h %d
+label = %date%
+label-padding = 4
+
+[module/time]
+type = internal/date
+interval = 1
+time = %r
+label = %time%
+label-padding = 4
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points) (unreleased)
+; Default: 5
+interval = 5
+
+[settings]
+screenchange-reload = true
+compositing-background = xor
+compositing-foreground = source
+;compositing-background = screen
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[settings]
+;screenchange-reload = true
+;compositing-background = source
+;compositing-foreground = over
+;compositing-border = over
+
