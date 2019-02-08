@@ -11,6 +11,16 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Compton Setup
 exec_always --no-startup-id compton -CGb
 
+# Bind Slack to Run
+bindsym $mod+Shift+Return exec flatpak run com.slack.Slack 
+
+# Run Blueman Automatically
+exec_always --no-startup-id blueman-manager
+
+# Screen Shots
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Control+Print exec gnome-screenshot -i
+
 # Raise Volume (Mod + .)
 #bindsym $mod+Shift+period exec pactl set-sink-volume 2 +5%
 # Lower Volume (Mod + ,)
@@ -168,8 +178,14 @@ gaps outer 5
 # Hide Window Title Bar
 new_window 1pixel
 
-set $windowBorderColor #d3d3d3
-set $otherWindowColor #969696
+#set $windowBorderColor #d3d3d3
+#set $otherWindowColor #707070
+
+
+set $windowBorderColor #b6bdca
+set $otherWindowColor #abb2bf
+
+
 
 # Set window colors - this still needs some tweaking for me
 
@@ -180,6 +196,6 @@ client.unfocused        $otherWindowColor		$otherWindowColor	 	$otherWindowColor
 client.urgent           $otherWindowColor		$otherWindowColor	 	$otherWindowColor   $otherWindowColor	
 
 # Set window border width
-default_border pixel 1
+default_border pixel 3
 
 

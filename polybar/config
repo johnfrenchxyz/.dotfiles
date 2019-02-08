@@ -4,46 +4,88 @@
 
 # vim:ft=dosini
 
-[base16]
-base00 = #181818
-base01 = #282828
-base02 = #383838
-base03 = #585858
-base04 = #b8b8b8
-base05 = #d8d8d8
-base06 = #e8e8e8
-base07 = #f8f8f8
-base08 = #ab4642
-base09 = #dc9656
-base0a = #f7ca88
-base0b = #a1b56c
-base0c = #86c1b9
-base0d = #7cafc2
-base0e = #ba8baf
-base0f = #a16946
+
+######################################
+#    Colors Based on OneDark Vim     #
+######################################
+
+[onedark]
+# Base (Darkest):
+base00 = #282c34
+# Base (Darker):
+base01 = #353b45
+# Darker Gray:
+base02 = #3e4451
+# Dark Gray:
+base03 = #545862
+# Gray:
+base04 = #565c64
+# Light Gray:
+base05 = #abb2bf
+# Very Light Gray:
+base06 = #b6bdca
+# White:
+base07 = #c8ccd4
+# Pink:
+base08 = #e06c75
+# Yellow:
+base09 = #d19a66
+# Yellow 2:
+base0A = #e5c07b
+# Green:
+base0B = #98c379
+# Light Blue:
+base0C = #56b6c2
+# Light Blue 2:
+base0D = #61afef
+# Purple:
+base0E = #c678dd
+# Red:
+base0F = #be5046
+
+[custom-colors]
+base-darkest = ${onedark.base00}
+base-darker = ${onedark.base01}
+darker-gray = ${onedark.base02}
+dark-gray = ${onedark.base03}
+gray = ${onedark.base04}
+light-gray = ${onedark.base05}
+very-light-gray = ${onedark.base06}
+white = ${onedark.base07}
+pink = ${onedark.base08}
+yellow = ${onedark.base09}
+green = ${onedark.0B}
+blue = ${onedark.base0C}
+purple = ${onedark.base0E}
+red = ${onedark.base0F}
+
+
 
 [colors]
-background = ${base16.base00}
-background-status = ${base16.base01}
-background-selection = ${base16.base02}
-comment = ${base16.base03}
-foreground-dark = ${base16.base04}
-foreground = ${base16.base05}
-foreground-light = ${base16.base06}
-foreground-lightest = ${base16.base07}
-red = ${base16.base08}
-orange = ${base16.base09}
-yellow = ${base16.base0a}
-green = ${base16.base0b}
-teal = ${base16.base0c}
-blue = ${base16.base0d}
-purple = ${base16.base0e}
-brown = ${base16.base0f}
-transparent = #00000000
+#background = ${base16.base00}
+#background-dark = #000000
+#background-status = ${base16.base01}
+#background-selection = ${base16.base02}
+#comment = ${base16.base03}
+#foreground-dark = ${base16.base04}
+#foreground = ${base16.base05}
+#foreground-light = ${base16.base06}
+#foreground-lightest = ${base16.base07}
+#red = ${base16.base08}
+#orange = ${base16.base09}
+#yellow = ${base16.base0a}
+#green = ${base16.base0b}
+#teal = ${base16.base0c}
+#blue = ${base16.base0d}
+#purple = ${base16.base0e}
+#brown = ${base16.base0f}
+#white = #ffffff
+#transparent = #00000000
 
 [padding]
-default = 2
-extra = 4
+default = 5
+extra = 2
+i3 = 5
 
 [icons]
 default = ֍
@@ -66,61 +108,41 @@ height = 55
 radius = 0
 fixed-center = true
 
-; Set the bar colors
-background = ${colors.background}
-;foreground = ${colors.foreground}
+override-redirect = false
 
-; This has to do with the behavior of floating windows
-; going above/below the bar, I think. This works for me.
-
+#background = ${custom-colors.white}
+background = #000000FF
 line-size = 2
 border-size = 0
 border-color = #ffffff
 padding-left = 0
-padding-right = 3
+padding-right = 0
 
+#font-0 = Nova Mono:pixelsize=11;1
+#font-1 = Nova:fontformat=truetype:size=8:antialias=false;0
+font-0 = Open Sans:pixelsize=11;1
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = inconsolata:pixelsize=8;1
-
-; This is where you put the modules where you want them. Then you
-; customize the modules below in the modules section.
-modules-left = i3
+modules-left = 
 modules-center = 
-modules-right = wlan pulseaudio date time
+modules-right = i3 date time 
 
 tray-position = right
-tray-padding = 0
-;tray-transparent = false
-;tray-background = #369
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+tray-padding = 10
+tray-background = ${custom-colors.base-darkest}
+tray-margin = 0
+tray-detached = false
+tray-offset-y = 0
 
 cursor-click = pointer
-;cursor-scroll = ns-resize
 
 
 ###################################
 #         Define Modules         #
 ###################################
 
-; These modules are the content of the bar. I've removed a bunch, so check out
-; the example configuration file if you want something less minimal.
-
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
-
-; This i3 module is what sets the workspaces. For some reason, I can get foreground
-; and border to change, but not bg, really. All my weird tweaking and padding DID get
-; me exactly what I wanted, even though this isn't really clean or perfect.
 
 [module/i3]
 type = internal/i3
@@ -132,64 +154,57 @@ enable-scroll = true
 wrapping-scroll = true
 reverse-scroll = true
 fuzzy-match = false
-
 format = <label-state> <label-mode>
 
-# Label
-
+# LABEL MODE
 label-mode = %mode%
-label-mode-padding = 4
-label-mode-background = ${colors.orange}
-label-mode-foreground = ${colors.background}
+label-mode-padding = ${padding.i3}
+label-mode-background = ${custom-colors.red}
 
-; focused = Active workspace on focused monitor
-;label-focused = %index%
-;label-focused = ${icons.default}
-label-focused-padding = 4
-label-focused-foreground = ${colors.blue}
-label-focused-background = ${colors.orange}
-;label-focused-underline = #ffffff
+# LABEL FOCUSED
+label-focused-padding = ${padding.i3}
+label-focused-foreground = ${custom-colors.red}
+label-focused-background = ${custom-colors.very-light-gray}
 
+# LABEL UNFOCUSED
+label-unfocused-padding = ${padding.i3}
+label-unfocused-foreground = ${custom-colors.base-darkest}
+label-unfocused-background = ${custom-colors.white}
 
-; unfocused = Inactive workspace on any monitor
-
-label-unfocused-padding = 4
-
-; visible = Active workspace on unfocused monitor
+# LABEL VISIBLE
 label-visible = %index%
-label-visible-padding = 4
+label-visible-padding = ${padding.i3}
 
-; urgent = Workspace with urgency hint set
-label-urgent-padding = 4
+# LABEL URGENT
+label-urgent-padding = ${padding.i3}
+label-urgent-foreground = ${custom-colors.white}
+label-urgent-background = ${custom-colors.red}
 
 [module/date]
 type = internal/date
 interval = 1
 date = %h %d
 label = %date%
-label-padding = 4
+label-padding = ${padding.default}
+label-foreground = ${custom-colors.base-darkest}
+label-background = ${custom-colors.white}
 
 [module/time]
 type = internal/date
 interval = 1
 time = %r
 label = %time%
-label-padding = 4
+label-padding = ${padding.default}
+label-foreground = ${custom-colors.base-darkest}
+label-background = ${custom-colors.white}
 
 [module/pulseaudio]
 type = internal/pulseaudio
-
-; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
-; If not, uses default sink
 sink = alsa_output.pci-0000_12_00.3.analog-stereo
-
-; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
-; Default: true
 use-ui-max = true
-
-; Interval for volume increase/decrease (in percent points) (unreleased)
-; Default: 5
 interval = 5
+label-padding = ${padding.extra}
+label-background = ${custom-colors.base-darkest}
 
 [settings]
 screenchange-reload = true
