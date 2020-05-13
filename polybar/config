@@ -101,7 +101,7 @@ font-0 = Open Sans:pixelsize=11;1
 
 modules-left = i3
 modules-center = 
-modules-right = date time 
+modules-right = pulseaudio date time 
 
 tray-position = right
 tray-padding = 10

@@ -11,16 +11,13 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Compton Setup
 exec_always --no-startup-id compton -CGb --config ~/.dotfiles/compton/config
 
-# Bind Slack to Run
-bindsym $mod+Shift+Return exec flatpak run com.slack.Slack 
-
 # Run Blueman Automatically
 exec_always --no-startup-id blueman-manager
 
 # Volume Controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 6 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 6 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 6 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # Screen Shots
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
@@ -188,7 +185,7 @@ new_window 1pixel
 
 
 set $windowBorderColor #ffffff
-set $otherWindowColor #f7f7f7
+set $otherWindowColor #dddddd
 
 
 
@@ -196,11 +193,11 @@ set $otherWindowColor #f7f7f7
 
 #colors:                border  						backgr.  						text    					 	indicator
 client.focused          $windowBorderColor	$windowBorderColor  $windowBorderColor 	$windowBorderColor
-client.focused_inactive $otherWindowColor		$otherWindowColor	 	$otherWindowColor   $otherWindowColor		
-client.unfocused        $otherWindowColor		$otherWindowColor	 	$otherWindowColor   $otherWindowColor	
+client.focused_inactive $windowBorderColor	$windowBorderColor	$windowBorderColor  $windowBorderColor
+client.unfocused        $otherWindowColor		$otherWindowColor	  $otherWindowColor	  $windowBorderColor
 client.urgent           $otherWindowColor		$otherWindowColor	 	$otherWindowColor   $otherWindowColor	
 
 # Set window border width
-default_border pixel 4
+default_border pixel 5
 
 
