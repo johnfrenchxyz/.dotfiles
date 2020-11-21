@@ -1,0 +1,22 @@
+" DISPLAY OPTIONS ----------
+
+" Display line numbers
+set number
+
+" Enable line wrapping
+set wrap
+
+" Always display the status bar
+set laststatus=2
+
+" INDENTATION OPTIONS ----------
+
+" Autoindent (new lines inherit the indentation of previous lines)
+set autoindent
+
+" Indent using 2 spaces
+set tabstop=2
+
+" When shifting, use 2 spaces
+set shiftwidth=2
+
