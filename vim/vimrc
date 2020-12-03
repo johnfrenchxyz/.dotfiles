@@ -28,3 +28,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Vim Vinegar - File explorer
+Plug 'tpope/vim-vinegar'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
