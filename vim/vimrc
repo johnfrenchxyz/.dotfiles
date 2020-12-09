@@ -36,5 +36,9 @@ call plug#begin('~/.vim/plugged')
 " Vim Vinegar - File explorer
 Plug 'tpope/vim-vinegar'
 
+" Git Gutter - View git additions/deletions
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_set_sign_backgrounds = 2
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
